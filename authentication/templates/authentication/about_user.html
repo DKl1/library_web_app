@@ -1,0 +1,85 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block content %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">MiddleName</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">CreatedAt</th>
+          <th scope="col">UpdatedAt</th>
+          <th scope="col">IsActive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.middle_name }}</td>
+          <td><a href="/user/{{user.id}}">{{ user.email }}</a></td>
+          {% if user.role == 1 %}
+          <td>librarian</td>
+          {% else %}
+          <td>visitor</td>
+          {% endif %}
+          <td>{{ user.created_at }}</td>
+          <td>{{ user.updated_at }}</td>
+          <td>{{ user.is_active }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 class="mb-5 mt-4 text-center">Orders {{ user.email }}:</h2>
+
+    <div class="container">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            Book
+          </div>
+          <div class="col">
+            CreatedAt
+          </div>
+          <div class="col">
+            PlatedEndAt
+          </div>
+          <div class="col">
+            EndAt
+          </div>
+          <div class="col">
+            Close Order
+          </div>
+        </div>
+      </div>
+      <hr>
+      {% for order in orders %}
+          <div class="container text-center mt-2">
+            <div class="row">
+              <div class="col">
+                {{ order.book.name }}
+              </div>
+              <div class="col">
+                {{ order.created_at }}
+              </div>
+              <div class="col">
+                {{ order.plated_end_at }}
+              </div>
+              <div class="col">
+                {{ order.end_at }}
+              </div>
+              <div class="col">
+                {% if order.end_at == None %}
+                <a class="btn btn-danger" href="/close/{{order.id}}">Close Order</a>
+                {% else %}
+                <a class="btn btn-success" href="#">Closed</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <hr>
+      {% endfor %}
+    </div>
+{% endblock %}

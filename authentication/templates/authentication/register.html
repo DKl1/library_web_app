@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    {% block content %}
+    <div class="wrap"></div>
+        <div class="container">
+            <div class="back"><a href="{% url 'books' %}">&lt;Back</a></div>
+            <div class="icon">
+                <i class="fa-solid fa-right-to-bracket"></i>
+            </div>
+            <div class="title">
+                <h5>Register</h5>
+            </div>
+            <form class="form" action="" method="post">
+                {% csrf_token %}
+                <div class="input">
+                    <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+                    {{form.first_name}}
+                </div>
+                <div class="border"></div>
+                <div class="input">
+                    <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+                    {{form.last_name}}
+                </div>
+                <div class="border"></div>
+                <div class="input">
+                    <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+                    {{form.middle_name}}
+                </div>
+                <div class="border"></div>
+                <div class="input">
+                    <div class="input-icon"><i class="fa-solid fa-envelope"></i></div>
+                    {{form.email}}
+                </div>
+                <div class="border"></div>
+                <div class="input">
+                    <div class="input-icon"><i class="fa-solid fa-key"></i></div>
+                    {{form.password}}
+                </div>
+                <div class="border"></div>
+                <div class="radio-input">
+                    {{form.role}}
+                </div>
+                <div class="login">
+                    <button class="submit" type="submit"><a href="{% url 'login' %}">Register</a></button>
+                </div>
+                <div class="signup">
+                    <a href="{% url 'login' %}">LOG IN</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+
+    <script>
+        let form_placeholders = document.getElementsByTagName('input')
+        form_placeholders[1].placeholder='firstname'
+        form_placeholders[2].placeholder='lastname'
+        form_placeholders[3].placeholder='middlename'
+        form_placeholders[4].placeholder='email'
+        form_placeholders[5].placeholder='password'
+        form_placeholders[5].type='password'
+
+        for (let field in form_placeholders){
+            form_placeholders[field].className += ' form-control'
+        }
+
+    </script>
+
+</body>
+</html>

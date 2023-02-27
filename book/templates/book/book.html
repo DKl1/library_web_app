@@ -1,0 +1,31 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <h2 class="text-center">All Books</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Author</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in list_book %}
+        <tr>
+          <td><a class="text-uppercase text-decoration-none fw-bold" href="/book/{{book.id}}">{{ book.name }}</a></td>
+          <td>
+              <div>
+                  {% for author in book.authors.all %}
+                  <p>{{author.name}} {{ author.surname }} {{author.patronymic}}</p>
+                  {% endfor %}
+              </div>
+          </td>
+          <td>{{ book.description | truncatewords:50 }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

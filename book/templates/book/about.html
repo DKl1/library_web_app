@@ -1,0 +1,31 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container book">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="d-flex justify-content-between">
+                <h1>{{item.name}}</h1>
+                <a class="btn btn-success ml-5"  href="{% url 'create_order' item.id %}">Create Order</a>
+{#                <div class="d-flex">#}
+{#                    <input name="date" type="datetime-local">#}
+{#                    {% if request.user.is_authenticated %}#}
+{##}
+{#                    <button class="btn btn-success ml-5" type="submit">Create Order</button>#}
+{#                    {% else %}#}
+{#                    <a class="btn btn-success ml-5" href="{% url 'login' %}">Order</a>#}
+{#                    {% endif %}#}
+{#                </div>#}
+            </div>
+            {% for author in item.authors.all %}
+            <h3>{{author.name}} {{author.surname}} {{author.patronymic}}</h3>
+            {% endfor %}
+            <h4>Description about book:</h4>
+            <div class="desc">
+                {{item.description}}
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

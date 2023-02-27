@@ -1,0 +1,22 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div>
+<h1 style="text-align: center">Creating an order</h1>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <div style="text-align: center; margin: 10%;">
+    <p>Reader: {{ reader }}</p>
+    <p>Book: {{ book }}</p>
+    <p>Planned_and_at: {{ planned_end_at }}</p>
+     <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>
+
+
+</div>
+
+{% endblock %}

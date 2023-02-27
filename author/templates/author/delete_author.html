@@ -1,0 +1,13 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block content %}
+    <form class="p-3" action="" method="post">
+    <div style="text-align: center; margin: 10%;">
+        {% csrf_token %}
+        <h4>Are you sure that you want to delete {{author.name}} {{author.surname}}?</h4>
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </div>
+    </form>
+
+{% endblock %}

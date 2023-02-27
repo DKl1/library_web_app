@@ -1,0 +1,47 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div style="text-align: right; margin: 10px;">
+    {% if request.user.is_staff %}
+    <a class="btn btn-success ml-5"  href="{% url 'create_author' %}">Create Author</a>
+    {% endif %}
+    </div>
+{#    <form method="post" class="row m-3">#}
+{#      {% csrf_token %}#}
+{#      <div class="col-4">#}
+{#        <input class="form-control form-control-sm" name="name" type="text" placeholder="name author" aria-label=".form-control-sm example">#}
+{#      </div>#}
+{#      <div class="col-4">#}
+{#        <input class="form-control form-control-sm" name="surname" type="text" placeholder="surname author" aria-label=".form-control-sm example">#}
+{#      </div>#}
+{#      <div class="col-3">#}
+{#        <input class="form-control form-control-sm" name="patronymic" type="text" placeholder="patronymic author" aria-label=".form-control-sm example">#}
+{#      </div>#}
+{#      <div class="col-1">#}
+{#        <button type="submit" class="btn btn-success">Create</button>#}
+{#      </div>#}
+{#    </form>#}
+    <h2 class="text-center mb-3">Authors</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Patronymic</th>
+          <th>Delete Author</th>
+            <th>Edit Author's info</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for author in authors %}
+        <tr>
+          <td>{{ author.name }}</td>
+          <td>{{ author.surname }}</td>
+          <td>{{ author.patronymic }}</td>
+          <td><a class="btn btn-danger" href="/authors/{{author.id}}">Delete</a></td>
+            <td><a class="btn btn-danger" href="{% url 'update_author' author.id %}">Edit</a></td>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}
