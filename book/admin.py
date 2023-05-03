@@ -11,14 +11,14 @@ class MembershipInline(admin.TabularInline):
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('name', 'get_description', 'count', 'get_authors', 'year_of_publication', 'id')
+    list_display = ('name', 'get_description', 'count', 'get_authors', 'year_of_publication', 'id', 'image')
     list_filter = ('id', 'name', 'count', 'authors', 'year_of_publication')
     fieldsets = (
         ("Сannot be changed", {
             'fields': ('name', 'description', 'authors', 'year_of_publication')
         }),
         ("Can Change", {
-            'fields': ('date_of_issue',)
+            'fields': ('date_of_issue', 'image', 'count')
         }),
     )
 

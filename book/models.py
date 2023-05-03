@@ -23,6 +23,7 @@ class Book(models.Model):
     date_of_issue = models.DateField(blank=True, null=True)
     id = models.AutoField(primary_key=True)
     authors = models.ManyToManyField(Author, blank=True)
+    image = models.ImageField(upload_to='book_images', blank=True, null=True)
 
     def __str__(self):
         """

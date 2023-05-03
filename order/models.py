@@ -20,31 +20,42 @@ class Order(models.Model):
            param plated_end_at: Describes the planned return period of the book (2 weeks from the moment of creation).
            type plated_end_at: int (timestamp)
        """
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, default=None)
+
+    # book = models.ForeignKey(Book, on_delete=models.CASCADE, default=None)
+
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(fields=['id', 'id'], name='unique_order_book')
+    #     ]
+
+    book = models.ManyToManyField(Book, related_name='orders')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     end_at = models.DateTimeField(default=None, null=True, blank=True)
     plated_end_at = models.DateTimeField(default=None)
+    is_prepared_at = models.DateTimeField(default=None, null=True, blank=True)
+    received_by_user_at = models.DateTimeField(default=None, null=True, blank=True)
 
     def __str__(self):
         """
         Magic method is redefined to show all information about Book.
         :return: book id, book name, book description, book count, book authors
         """
-        if self.end_at == None:
-            return f"\'id\': {self.pk}, " \
-                   f"\'user\': CustomUser(id={self.user.pk})," \
-                   f" \'book\': Book(id={self.book.pk})," \
-                   f" \'created_at\': \'{self.created_at}\'," \
-                   f" \'end_at\': {self.end_at}," \
-                   f" \'plated_end_at\': \'{self.plated_end_at}\'"
-        else:
-            return f"\'id\': {self.pk}, " \
-                   f"\'user\': CustomUser(id={self.user.pk})," \
-                   f" \'book\': Book(id={self.book.pk})," \
-                   f" \'created_at\': \'{self.created_at}\'," \
-                   f" \'end_at\': \'{self.end_at}\'," \
-                   f" \'plated_end_at\': \'{self.plated_end_at}\'"
+        return f"{self.book}"
+        # if self.end_at == None:
+        #     return f"\'id\': {self.pk}, " \
+        #            f"\'user\': CustomUser(id={self.user.pk})," \
+        #            f" \'book\': Book(id={self.book.pk})," \
+        #            f" \'created_at\': \'{self.created_at}\'," \
+        #            f" \'end_at\': {self.end_at}," \
+        #            f" \'plated_end_at\': \'{self.plated_end_at}\'"
+        # else:
+        #     return f"\'id\': {self.pk}, " \
+        #            f"\'user\': CustomUser(id={self.user.pk})," \
+        #            f" \'book\': Book(id={self.book.pk})," \
+        #            f" \'created_at\': \'{self.created_at}\'," \
+        #            f" \'end_at\': \'{self.end_at}\'," \
+        #            f" \'plated_end_at\': \'{self.plated_end_at}\'"
 
     def __repr__(self):
         """
