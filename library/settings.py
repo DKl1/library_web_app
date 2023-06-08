@@ -117,8 +117,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'klymbag@gmail.com'
-EMAIL_HOST_PASSWORD = 'qkqmfomvswrhljik'
+EMAIL_HOST_USER = 'test.using.email2@gmail.com'
+EMAIL_HOST_PASSWORD = 'ikxmvrpuqmmfjdva'
 EMAIL_USE_TLS = True
 
 # Password validation
@@ -204,6 +204,11 @@ LOGGING = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",  # Your React app's address
+# ]
+#
 
 try:
     from .local_settings import *
